@@ -1,4 +1,5 @@
 import app
+import os
 import sys
 
 from machine import I2C
@@ -18,6 +19,7 @@ if sys.implementation.name == "micropython":
     ASSET_PATH = path + "/assets/"
 else:
     ASSET_PATH = "apps/tildagon-39c3/assets/"
+
 
 class App39c3(app.App):
     def __init__(self):
@@ -53,11 +55,9 @@ class App39c3(app.App):
     def turn_off(self):
         eventbus.emit(PatternDisable())
         for i in range(0, 12):
-            tildagonos.leds[i+1] = (0, 0, 0)
+            tildagonos.leds[i + 1] = (0, 0, 0)
         tildagonos.leds.write()
         self.on = False
-
-
 
 
 __app_export__ = App39c3
